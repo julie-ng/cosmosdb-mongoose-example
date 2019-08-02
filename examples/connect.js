@@ -8,8 +8,9 @@ mongoose.connect(config.connectionString, config.options)
 		mongoose.disconnect().then(() => console.log('[Disconnected] bye bye'))
 
 	}).catch((err) => {
-		console.log('[Error] - could not connect to ${config.host}')
+		console.log(`[Error] - could not connect to ${config.connectionString}`)
 		console.log(err)
+		process.exit(1)
 	})
 
 
