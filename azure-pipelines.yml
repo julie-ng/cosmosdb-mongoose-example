@@ -1,0 +1,32 @@
+# Node.js
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+  branches:
+    include:
+    - master
+    - feat/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: npm install
+  displayName: 'npm install'
+
+# Sometimes audit via npmjs.org unreliable…
+- script: npm audit
+  displayName: 'Dependency Audit'
+
+- script: npm run lint
+  displayName: 'Lint Code'
+
+- script: npm run connect
+  displayName: 'Test Example - Connect'
+  env:
+    DB_PASSWORD: $(DB_PASSWORD)
