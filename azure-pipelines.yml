@@ -35,7 +35,7 @@ steps:
 - script: npm run lint
   displayName: 'Lint Code'
 
-- script: npm run connect
-  displayName: 'Test Example - Connect'
+- script: npm run examples
+  displayName: 'Run Examples'
   env:
     DB_PASSWORD: $(DB_PASSWORD)

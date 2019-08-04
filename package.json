@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "node examples/connect.js",
-    "connect": "node examples/connect.js",
+    "examples": "node examples/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "preflight": "npm audit && npm run lint",
