@@ -14,7 +14,7 @@
     "examples": "node examples/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "preflight": "npm audit && npm run lint",
+    "preflight": "npm audit && npm run lint && npm run examples",
     "release": "standard-version"
   },
   "dependencies": {
