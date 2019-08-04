@@ -7,6 +7,15 @@ trigger:
     - master
     - feat/*
 
+schedules:
+- cron: "0 0 * * Mon"
+  displayName: Weekly midnight build
+  always: true
+  branches:
+    include:
+    - master
+    - releases/*
+
 pool:
   vmImage: 'ubuntu-latest'
 
