@@ -1,5 +1,5 @@
 'use strict'
-const Family = require('./family.schema')
+const Family = require('./family.model')
 
 const countFamilies = function () {
 	return new Promise((resolve, reject) => {
