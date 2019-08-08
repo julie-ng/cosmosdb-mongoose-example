@@ -2,7 +2,7 @@
 
 const db = require('./../../db')
 const optimizedAddFamily = require('./family.add')
-const optimizedAddVacation = require('./family.add')
+const optimizedAddVacation = require('./vacation.add')
 
 // Which tests to run?
 async function runTests () {

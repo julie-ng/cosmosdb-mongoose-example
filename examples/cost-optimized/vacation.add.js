@@ -11,7 +11,7 @@ function addVacation () {
 		vacation.save((err, res) => {
 			if (err) reject(err)
 			if (res) {
-				console.log('[INFO] New Family saved', JSON.stringify(res))
+				console.log('[INFO] New VacationDestination saved', JSON.stringify(res))
 				resolve(res)
 			}
 		})
