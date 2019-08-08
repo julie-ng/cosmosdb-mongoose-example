@@ -5,8 +5,8 @@
 This repository shows how to use [Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/) with Node.js and the [MongoDB protocol](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction) with the popular [mongoose](https://www.npmjs.com/package/mongoose) npm package.
 
 - create and setup database in Azure Portal
-- code examples with mongoose library
-- cost-optimized examples with mongoose discriminators
+- code examples with [mongoose](https://www.npmjs.com/package/mongoose) library
+- [cost-optimized examples with mongoose discriminators](#azure-cost-optimization)
 
 This is the goal result:
 
@@ -65,6 +65,16 @@ npm install
 npm run simple-examples
 npm run optimized-examples
 ```
+
+## Azure Cost Optimization
+
+By default Mongoose creates a new colleciton per model. Because Azure charges you per collection, it makes sense to use [mongoose discriminators](https://mongoosejs.com/docs/discriminators.html) to leverage **schema inheritance** to optimize costs:
+
+![](./images/cost-optimized-collections.svg)
+
+Then you only **pay once for the `Base` model collection** instaead of doubling costs for `Family` and `Vacation` models.
+
+For more details [see the Azure docs &rarr;](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-mongoose#caveats-to-using-mongoose-with-cosmos-db)
 
 # Misc.
 
