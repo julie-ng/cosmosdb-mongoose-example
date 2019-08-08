@@ -4,20 +4,17 @@
 
 This repository shows how to use [Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/) with Node.js and the [MongoDB protocol](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction) with the popular [mongoose](https://www.npmjs.com/package/mongoose) npm package.
 
-## Setup
+- create and setup database in Azure Portal
+- code examples with mongoose library
+- cost-optimized examples with mongoose discriminators
 
-3. Create your CosmosDB account and database per [Azure Docs* &rarr;](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-mongoose)
-4. Once your database is deployed, find your credentials under "Connection String"
-
-5. Enable **Aggregation Pipeline** in your CosmosDB per [aka.ms/mongodb-aggregation](https://aka.ms/mongodb-aggregation) to use mongoose's rich API.
-
-*TODO: replace this link because it's outdated
-
-## Run Examples
-
-This repository shows a few examples. When run, the results are outputted to the console:
+This is the goal result:
 
 ```
+$ npm run simple-examples
+
+> node examples/simple/run.js
+
 [INFO] Connected (…)
 [INFO] Number of Families: 4
 [INFO] New Family saved (…)
@@ -25,13 +22,29 @@ This repository shows a few examples. When run, the results are outputted to the
 [INFO] Disconnected, bye bye
 ```
 
-Get the code to run these examples:
+## Step 1 - Create a Cosmos DB in Azure Portal
 
-```bash
+1. Login to [https://portal.azure.com &rarr;](https://portal.azure.com)
+
+2. Follow the the official [Azure Docs: Connect a Node.js Mongoose application to Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-mongoose) to create a cosmos account. Then come back here. *Do not follow the Node.js code, which is outdated.*
+
+3. Enable **Aggregation Pipeline** in your CosmosDB per [aka.ms/mongodb-aggregation](https://aka.ms/mongodb-aggregation) to use mongoose's rich API.
+	Otherwise some operations like mongoose's `db.collection.countDocuments()` will not work.
+
+
+4. Take note of your credentials in the **Connect String** plane. You will need these later.
+
+	![Cosmos DB Credentials](./images/cosmos-connection-string.png)
+
+## Step 2 - Get Code 
+
+First you need the code in this repository
+
+```
 git clone https://github.com/julie-ng/cosmosdb-mongoose-example
 ```
 
-### Configure Credentials
+## Step 3 - Configure Credentials
 
 To test your connection locally, copy `.env.example` and rename it to `.env` filling in your credentials:
 
@@ -43,11 +56,28 @@ To test your connection locally, copy `.env.example` and rename it to `.env` fil
 | `DB_PORT` | 10255 | "Port". Default is 10255 |
 | `DB_NAME` | testdb | You must first create this in the "Data Explorer" plane of your Cosmos DB.|
 
-### Run the Code
+## Last Step - run the examples
 
 Finally, install the dependencies and run all examples:
 
 ```bash
 npm install
-npm run examples
+npm run simple-examples
+npm run optimized-examples
 ```
+
+# Misc.
+
+## New to JavaScript?
+
+Don't worry. These examples are easy to follow. But just in case, you need some guidance:
+
+- **Promises and Async/Await**  
+	To run multiple examples with a single connection, we have to add some extra Promises. See details at [`./examples/README.md` &rarr;](./examples/README.md)
+
+- **ES6 Modules**  
+	Compared to the official Microsoft documentation, each operation is split into its own file, e.g. `family.add.js`. 
+	
+	[Learn about ES6 modules here on MSN &rarr;](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+
+Have fun exploring the examples. If you have any questions, [open an issue &rarr;](./issues)
