@@ -15,7 +15,7 @@
     "optimized-examples": "node examples/cost-optimized/run.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "preflight": "npm audit && npm run lint && npm run examples",
+    "preflight": "npm audit && npm run lint && npm run simple-examples && npm run optimized-examples",
     "release": "standard-version"
   },
   "dependencies": {
