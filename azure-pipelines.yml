@@ -35,7 +35,12 @@ steps:
 - script: npm run lint
   displayName: 'Lint Code'
 
-- script: npm run examples
+- script: npm run simple-examples
+  displayName: 'Run Examples'
+  env:
+    DB_PASSWORD: $(DB_PASSWORD)
+
+- script: npm run optimized-examples
   displayName: 'Run Examples'
   env:
     DB_PASSWORD: $(DB_PASSWORD)

@@ -6,9 +6,6 @@ const vacation = new Vacation({
 	country: "USA"
  })
 
-//  vacation.save((err, saveVacay) => {
-//  })
-
 function addVacation () {
 	return new Promise((resolve, reject) => {
 		vacation.save((err, res) => {
