@@ -22,6 +22,10 @@ $ npm run simple-examples
 [INFO] Disconnected, bye bye
 ```
 
+This repository guides you through the examples. It is recommended to [browse through on GitHub.com](https://github.com/julie-ng/cosmosdb-mongoose-example/) before trying out the code.
+
+Note: some code is from [the official azure docs](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-mongoose). It was fixed, updated for 2019 and adds CI to ensure the example remains working.
+
 ## Step 1 - Create a Cosmos DB in Azure Portal
 
 1. Login to [https://portal.azure.com &rarr;](https://portal.azure.com)
