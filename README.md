@@ -78,7 +78,7 @@ By default Mongoose creates a new colleciton per model. Because Azure charges yo
 
 Then you only **pay once for the `Base` model collection** instaead of doubling costs for `Family` and `Vacation` models.
 
-For more details [see the Azure docs &rarr;](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-mongoose#caveats-to-using-mongoose-with-cosmos-db)
+For more details [see the cost optimized examples &rarr;](./examples/cost-optimized/)
 
 # Misc.
 
