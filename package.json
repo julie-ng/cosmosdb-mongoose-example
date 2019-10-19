@@ -2,7 +2,7 @@
   "name": "cosmosdb-mongoose-demo",
   "version": "0.1.0",
   "description": "A demo of using Cosmos DB with the Mongo API and mongoose library",
-  "private": "true",
+  "private": true,
   "author": "Julie Ng",
   "license": "MIT",
   "repository": {
