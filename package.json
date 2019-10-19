@@ -1,6 +1,6 @@
 {
   "name": "cosmosdb-mongoose-demo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A demo of using Cosmos DB with the Mongo API and mongoose library",
   "private": true,
   "author": "Julie Ng",
@@ -16,7 +16,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "preflight": "npm audit && npm run lint && npm run simple-examples && npm run optimized-examples",
-    "release": "standard-version"
+    "release": "standard-version --release-as minor"
   },
   "dependencies": {
     "dotenv": "^8.0.0",
