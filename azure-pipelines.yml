@@ -31,6 +31,7 @@ steps:
 # Sometimes audit via npmjs.org unreliable…
 - script: npm audit
   displayName: 'Dependency Audit'
+  continueOnError: true
 
 - script: npm run lint
   displayName: 'Lint Code'
