@@ -1,6 +1,7 @@
 # Azure Examples: Cosmos DB and Mongoose
 
 [![Build Status](https://dev.azure.com/julie-msft/cosmosdb-mongoose-example/_apis/build/status/julie-ng.cosmosdb-mongoose-example?branchName=master)](https://dev.azure.com/julie-msft/cosmosdb-mongoose-example/_build/latest?definitionId=1&branchName=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/julie-ng/cosmosdb-mongoose-example/badge.svg)](https://snyk.io/test/github/julie-ng/cosmosdb-mongoose-example)
 
 This repository shows how to use [Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/) with Node.js and the [MongoDB protocol](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction) with the popular [mongoose](https://www.npmjs.com/package/mongoose) npm package.
 
