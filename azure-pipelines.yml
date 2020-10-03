@@ -4,7 +4,7 @@ name: $(BuildID)
 trigger:
   branches:
     include:
-    - master
+    - main
     - feat/*
 
 schedules:
@@ -13,7 +13,7 @@ schedules:
   always: true
   branches:
     include:
-    - master
+    - main
     - releases/*
 
 variables:
