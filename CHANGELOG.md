@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/julie-ng/cosmosdb-mongoose-example/compare/v0.2.0...v0.3.0) (2020-10-03)
+
+
+### Features
+
+* **examples:** update js code, use cosmos free tier ([d035511](https://github.com/julie-ng/cosmosdb-mongoose-example/commit/d035511275631f95fb1fce065e0a6e1d36486c90))
+* **pipeline:** use new 'main' branch name, not master ([f754136](https://github.com/julie-ng/cosmosdb-mongoose-example/commit/f75413690a6e48e2d6459bfeaabf648350ccf38c))
+
 ## 0.2.0 (2019-10-19)
 
 
