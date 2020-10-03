@@ -1,6 +1,11 @@
-.DS_Store
+# Local Dev Environment
 .env
-node_modules/
 *.tmp
 *.log
-*coverage/
+debug.azcli
+
+# Node.js dependencies
+node_modules/
+
+# Mac OS
+.DS_Store
