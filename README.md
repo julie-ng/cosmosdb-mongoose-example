@@ -54,11 +54,11 @@ export COSMOS_DEMO_RG_NAME=mycosmosdb-demo-rg
 
 ```bash
 az cosmosdb create \
-	--name $COSMOS_DEMO_ACCOUNT_NAME \
-	--resource-group $COSMOS_DEMO_RG_NAME \
-	--kind MongoDB \
-	--capabilities EnableAggregationPipeline \
-	--enable-free-tier true 	
+    --name $COSMOS_DEMO_ACCOUNT_NAME \
+    --resource-group $COSMOS_DEMO_RG_NAME \
+    --kind MongoDB \
+    --capabilities EnableAggregationPipeline \
+    --enable-free-tier true 	
 ```
 
 ### Create Database
@@ -67,9 +67,9 @@ We will name ours `mongodemo`
 
 ```bash
 az cosmosdb mongodb database create \
-  --resource-group $COSMOS_DEMO_RG_NAME \
-  --account-name $COSMOS_DEMO_ACCOUNT_NAME \
-  --name mongodemo
+    --resource-group $COSMOS_DEMO_RG_NAME \
+    --account-name $COSMOS_DEMO_ACCOUNT_NAME \
+    --name mongodemo
 ```
 
 ### Get Secret Key
@@ -78,9 +78,9 @@ Note: [jq](https://stedolan.github.io/jq/) is used to parse JSON output from Azu
 
 ```bash
 az cosmosdb keys list \
-	--name $COSMOS_DEMO_ACCOUNT_NAME \
-	--resource-group $COSMOS_DEMO_RG_NAME \
-	| jq '.primaryMasterKey' | sed 's/"//g'
+    --name $COSMOS_DEMO_ACCOUNT_NAME \
+    --resource-group $COSMOS_DEMO_RG_NAME \
+    | jq '.primaryMasterKey' | sed 's/"//g'
 ```
 
 ## Step 2 - Get Code 
