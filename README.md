@@ -1,15 +1,15 @@
 # Azure Examples: Cosmos DB and Mongoose
 
-[![Build Status](https://dev.azure.com/julie-msft/cosmosdb-mongoose-example/_apis/build/status/julie-ng.cosmosdb-mongoose-example?branchName=master)](https://dev.azure.com/julie-msft/cosmosdb-mongoose-example/_build/latest?definitionId=1&branchName=master)
+[![Build Status](https://dev.azure.com/julie-msft/cosmosdb-mongoose-example/_apis/build/status/julie-ng.cosmosdb-mongoose-example?branchName=main)](https://dev.azure.com/julie-msft/cosmosdb-mongoose-example/_build/latest?definitionId=1&branchName=main)
 [![Known Vulnerabilities](https://snyk.io/test/github/julie-ng/cosmosdb-mongoose-example/badge.svg)](https://snyk.io/test/github/julie-ng/cosmosdb-mongoose-example)
 
 This repository shows how to use [Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/) with Node.js and the [MongoDB protocol](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction) with the popular [mongoose](https://www.npmjs.com/package/mongoose) npm package.
 
-- create and setup database in Azure Portal
+- create a Cosmos DB account and database using Azure CLI
 - code examples with [mongoose](https://www.npmjs.com/package/mongoose) library
 - [cost-optimized examples with mongoose discriminators](#azure-cost-optimization)
 
-This is the goal result:
+Example Demo Output:
 
 ```
 $ npm run simple-examples
@@ -23,23 +23,65 @@ $ npm run simple-examples
 [INFO] Disconnected, bye bye
 ```
 
-This repository guides you through the examples. It is recommended to [browse through on GitHub.com](https://github.com/julie-ng/cosmosdb-mongoose-example/) before trying out the code.
+## Azure Cost Optimization
 
-Note: some code is from [the official azure docs](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-mongoose). It was fixed, updated for 2019 and adds CI to ensure the example remains working.
+By default Mongoose creates a new colleciton per model. Because Azure charges you per collection, it makes sense to use [mongoose discriminators](https://mongoosejs.com/docs/discriminators.html) to leverage **schema inheritance** to optimize costs:
 
-## Step 1 - Create a Cosmos DB in Azure Portal
+![](./images/cost-optimized-collections.svg)
 
-1. Login to [https://portal.azure.com &rarr;](https://portal.azure.com)
+Then you only **pay once for the `Base` model collection** instaead of doubling costs for `Family` and `Vacation` models.
 
-2. Follow the the official [Azure Docs: Connect a Node.js Mongoose application to Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-mongoose) to create a cosmos account. Then come back here. *Do not follow the Node.js code, which is outdated.*
+For more details [see the cost optimized examples &rarr;](./examples/cost-optimized/)
 
-3. Enable **Aggregation Pipeline** in your CosmosDB per [aka.ms/mongodb-aggregation](https://aka.ms/mongodb-aggregation) to use mongoose's rich API.
-	Otherwise some operations like mongoose's `db.collection.countDocuments()` will not work.
+# Usage
+
+## Step 1 - Create a Cosmos DB (Azure CLI)
 
 
-4. Take note of your credentials in the **Connect String** plane. You will need these later.
+### Set Resource Names for Reuse
 
-	![Cosmos DB Credentials](./images/cosmos-connection-string.png)
+_N.B. Cosmos DB account names must be globally unique_
+
+```bash
+export COSMOS_DEMO_ACCOUNT_NAME=mycosmosdb-demo
+export COSMOS_DEMO_RG_NAME=mycosmosdb-demo-rg
+```
+
+### Create Cosmos DB Account
+
+- Free Tier: is limited to 1 account per subscription. Remove `--enable-free-tier` if required
+- Enable [Aggregation Pipeline](https://aka.ms/mongodb-aggregation) for mongoose's rich API, so we can use e.g. `db.collection.countDocuments()` 
+
+```bash
+az cosmosdb create \
+	--name $COSMOS_DEMO_ACCOUNT_NAME \
+	--resource-group $COSMOS_DEMO_RG_NAME \
+	--kind MongoDB \
+	--capabilities EnableAggregationPipeline \
+	--enable-free-tier true 	
+```
+
+### Create Database
+
+We will name ours `mongodemo`
+
+```bash
+az cosmosdb mongodb database create \
+  --resource-group $COSMOS_DEMO_RG_NAME \
+  --account-name $COSMOS_DEMO_ACCOUNT_NAME \
+  --name mongodemo
+```
+
+### Get Secret Key
+
+Note: [jq](https://stedolan.github.io/jq/) is used to parse JSON output from Azure CLI and is [pre-installed](https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu1804-README.md) on Azure DevOps hosted ubuntu agents.
+
+```bash
+az cosmosdb keys list \
+	--name $COSMOS_DEMO_ACCOUNT_NAME \
+	--resource-group $COSMOS_DEMO_RG_NAME \
+	| jq '.primaryMasterKey' | sed 's/"//g'
+```
 
 ## Step 2 - Get Code 
 
@@ -51,35 +93,25 @@ git clone https://github.com/julie-ng/cosmosdb-mongoose-example
 
 ## Step 3 - Configure Credentials
 
-To test your connection locally, copy `.env.example` and rename it to `.env` filling in your credentials:
+To test your connection locally, copy `.env.example` and rename it to `.env` filling in your configuration, for example
 
-| Variable | Example | Reference in Azure Portal
-|:--|:--|:--|
-| `DB_HOST` | `exampledb.documents.azure.com` | "Host" |
-| `DB_USER` | exampledb | "Username" |
-| `DB_PASSWORD` |  | "Primary Password" |
-| `DB_PORT` | 10255 | "Port". Default is 10255 |
-| `DB_NAME` | testdb | You must first create this in the "Data Explorer" plane of your Cosmos DB.|
+```
+# .env
+DB_HOST=mycosmosdb.documents.azure.com
+DB_USER=mycosmosdb
+DB_PASSWORD=myaccountprimarykey
+DB_NAME=mydbname
+DB_PORT=10255
+```
 
-## Last Step - run the examples
+## Final Step - run the examples
 
-Finally, install the dependencies and run all examples:
 
 ```bash
 npm install
 npm run simple-examples
 npm run optimized-examples
 ```
-
-## Azure Cost Optimization
-
-By default Mongoose creates a new colleciton per model. Because Azure charges you per collection, it makes sense to use [mongoose discriminators](https://mongoosejs.com/docs/discriminators.html) to leverage **schema inheritance** to optimize costs:
-
-![](./images/cost-optimized-collections.svg)
-
-Then you only **pay once for the `Base` model collection** instaead of doubling costs for `Family` and `Vacation` models.
-
-For more details [see the cost optimized examples &rarr;](./examples/cost-optimized/)
 
 # Misc.
 
