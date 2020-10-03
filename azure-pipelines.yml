@@ -16,6 +16,9 @@ schedules:
     - master
     - releases/*
 
+variables:
+  - group: cosmos-mongoapi-demo-vars
+
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -30,12 +33,13 @@ steps:
 - script: npm run lint
   displayName: 'Lint Code'
 
-- script: npm run simple-examples
-  displayName: 'Run Examples (simple)'
+- script: |
+    npm run simple-examples
+    npm run optimized-examples
+  displayName: 'Run Examples'
   env:
-    DB_PASSWORD: $(DB_PASSWORD)
-
-- script: npm run optimized-examples
-  displayName: 'Run Examples (optimized)'
-  env:
-    DB_PASSWORD: $(DB_PASSWORD)
+    DB_HOST: $(lib-cosmos-db-host)
+    DB_USER: $(lib-cosmos-db-user)
+    DB_NAME: $(lib-cosmos-db-name)
+    DB_PASSWORD: $(lib-cosmos-db-password)
+    DB_PORT: 10255
