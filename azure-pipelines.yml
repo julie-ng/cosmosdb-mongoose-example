@@ -19,8 +19,10 @@ schedules:
 variables:
   - group: cosmos-mongoapi-demo-vars
 
-pool:
-  vmImage: 'ubuntu-latest'
+pool: 'dsvm-agents'
+
+# pool:
+#   vmImage: 'ubuntu-latest'
 
 steps:
 - script: npm install
